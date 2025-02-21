@@ -15,8 +15,6 @@ Students. Academic penalties up to and including an F in the course are likely.
 UT EID 1: yl42556
 """
 
-
-# TODO: implement this function. You may delete this comment when you are done.
 def length_of_longest_substring_n3(s):
     """
     Finds the length of the longest substring without repeating characters
@@ -26,10 +24,17 @@ def length_of_longest_substring_n3(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    
+    longest_substr = 0
+    for n in range(len(s)):
+        freq_list = [0] * 256
+        for m in (range(n, len(s))):
+            freq_list[ord(s[m])] += 1
+            sub_str = s[n:m+1]
+            if len(sub_str) > longest_substr and max(freq_list) <= 1:
+                longest_substr = len(sub_str)
+    return longest_substr
 
 
-# TODO: implement this function. You may delete this comment when you are done.
 def length_of_longest_substring_n2(s):
     """
     Finds the length of the longest substring without repeating characters
@@ -41,10 +46,19 @@ def length_of_longest_substring_n2(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    # two loops?
+    longest_substr = 0
+    for n in range(len(s)):
+        freq_list = [0] * 256
+        for m in (range(n, len(s))):
+            freq_list[ord(s[m])] += 1
+            if freq_list[ord(s[m])] > 1:
+                break
+            current_length = m - n + 1
+            if current_length > longest_substr:
+                longest_substr = current_length
+    return longest_substr
 
 
-# TODO: implement this function. You may delete this comment when you are done.
 def length_of_longest_substring_n(s):
     """
     Finds the length of the longest substring without repeating characters
@@ -58,17 +72,18 @@ def length_of_longest_substring_n(s):
     post: Returns an integer >= 0 representing the length of the longest substring
           in s that contains no repeating characters.
     """
-    check = []
+    seen = set()
     longest_substr = 0
-    for j in len(s):
-        if s[j] not in check:
-            check.append(s[j])
+    start = 0
+    for end, char in enumerate(s):
+        if char not in seen:
+            seen.add(char)
         else:
-            count = j - i
-            if count > longest_substr:
-                longest_substr = count
-            # maybe can take off ln 73
-            i += 1
-            while i < j:
-                if s[i] == s[j]:
-                    i += 1
+            while not s[start] == s[end]:
+                seen.remove(s[start])
+                start += 1
+            start += 1
+        current_len = len(seen)
+        if current_len > longest_substr:
+            longest_substr = current_len
+    return longest_substr
