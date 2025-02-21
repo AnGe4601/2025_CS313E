@@ -54,8 +54,7 @@ def length_of_longest_substring_n2(s):
             if freq_list[ord(s[m])] > 1:
                 break
             current_length = m - n + 1
-            if current_length > longest_substr:
-                longest_substr = current_length
+            longest_substr = max(longest_substr, current_length)
     return longest_substr
 
 
@@ -75,15 +74,14 @@ def length_of_longest_substring_n(s):
     seen = set()
     longest_substr = 0
     start = 0
-    for end, char in enumerate(s):
+    for char in s:
         if char not in seen:
             seen.add(char)
         else:
-            while not s[start] == s[end]:
+            while not s[start] == char:
                 seen.remove(s[start])
                 start += 1
             start += 1
         current_len = len(seen)
-        if current_len > longest_substr:
-            longest_substr = current_len
+        longest_substr = max(longest_substr, current_len)
     return longest_substr
