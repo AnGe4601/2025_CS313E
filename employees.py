@@ -188,14 +188,14 @@ class PermanentEmployee(Employee):
     def work(self):
         performance_change = random.randint(-10, 10)
         self.performance += performance_change
-        if self.performance >= 0:
+        if performance_change >= 0:
             self.happiness += 1
     # Interact
     def interact(self, other):
         super().interact(other)
-        if  self.manager == other and isinstance(other, Manager):
+        if  self.manager == other:
             if (other.happiness > HAPPINESS_THRESHOLD and
-                self.performance > PERM_EMPLOYEE_PERFORMANCE_THRESHOLD):
+                self.performance >= PERM_EMPLOYEE_PERFORMANCE_THRESHOLD):
                 self.savings += MANAGER_BONUS
             elif other.happiness <= HAPPINESS_THRESHOLD:
                 self.happiness -= 1
