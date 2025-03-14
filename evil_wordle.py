@@ -92,8 +92,9 @@ class Keyboard:
                 elif feedback_colors[i] == WRONG_SPOT_COLOR:
                     if self.colors[letter] != CORRECT_COLOR:
                         self.colors[letter] = WRONG_SPOT_COLOR
+                else:
+                    self.colors[letter] = NOT_IN_WORD_COLOR
 
-    # TODO: Modify this method. You may delete this comment when you are done.
     def __str__(self):
         """
         Returns a string representation of the keyboard, showing each letter in its
@@ -115,7 +116,21 @@ class Keyboard:
         post: Returns a formatted string with each letter colored according to feedback
               and arranged to match a typical keyboard layout.
         """
-        return ""
+        display_list = []
+        for row in range(3):
+            for letter in self.rows[row]:
+                if letter in ("p", "l"):
+                    display_list.append(color_word(self.colors[letter], letter) + "\n")
+                elif letter == "a":
+                    display_list.append(" " + color_word(self.colors[letter], letter) + " ")
+                elif letter == "z":
+                    display_list.append("   " + color_word(self.colors[letter], letter) + " ")
+                elif letter == "m":
+                    display_list.append(color_word(self.colors[letter], letter))
+                else:
+                    display_list.append(color_word(self.colors[letter], letter) + " ")
+        display = "".join(display_list)
+        return display
 
 
 class WordFamily:
@@ -180,8 +195,7 @@ class WordFamily:
          # larger size more difficult
         elif len(self.words) > len(other.words):
             return True
-        else:
-            return False
+        return False
 
     # DO NOT change this method.
     # You should use this for debugging!
@@ -226,7 +240,6 @@ def print_explanation(attempts):
     print(BOLD_COLOR + "u" + NO_COLOR, end=" ")
     print("is not in the word in any spot.")
     print()
-
 
 # DO NOT change this function
 def color_word(colors, word):
