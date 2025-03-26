@@ -96,6 +96,9 @@ class Node:
 
 
 class LinkedList:
+    '''
+    Polynomial represented as Linked List
+    '''
     def __init__(self):
         # You are also welcome to use a sentinel/dummy node!
         # It is definitely recommended, which will we learn more
@@ -111,6 +114,9 @@ class LinkedList:
     # If a term with that exponent already exists, add the coefficients together.
     # You must keep the terms in descending order by exponent.
     def insert_term(self, coeff, exp):
+        '''
+        Insert new term into polynomial
+        '''
         if coeff == 0:
             return
         new_term = Node(coeff, exp)
@@ -124,7 +130,7 @@ class LinkedList:
                     prev.next = curr_term.next
                 return
             # keep descend order
-            elif exp > curr_term.exp:
+            if exp > curr_term.exp:
                 prev.next = new_term
                 new_term.next = curr_term
                 return
@@ -209,9 +215,9 @@ def main():
         term_q = input().split()
         poly_q.insert_term(int(term_q[0]), int(term_q[1]))
     # get sum of both & print
-    print(term_p.add(term_q))
+    print(poly_p.add(poly_q))
     # get product of both & print
-    print(term_p.mult(term_q))
+    print(poly_p.mult(poly_q))
 
 if __name__ == "__main__":
     main()
