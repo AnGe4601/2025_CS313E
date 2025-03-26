@@ -203,6 +203,7 @@ def main():
         term_p = input().split()
         poly_p.insert_term(int(term_p[0]), int(term_p[1]))
     # create q
+    input()
     frequency_q = int(input())
     for _ in range(frequency_q):
         term_q = input().split()
