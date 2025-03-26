@@ -133,8 +133,14 @@ class LinkedList:
         prev.next = new_term
         return
 
-    # Add a polynomial p to the polynomial and return the resulting polynomial as a new linked list.
     def add(self, p):
+        '''
+        Add a polynomial with polynomial p
+
+        Return
+        ------
+        LinkedList: new_ll
+        '''
         self_val = self.dummy.next
         p_val = p.dummy.next
         new_ll = LinkedList()
@@ -150,11 +156,13 @@ class LinkedList:
         new_ll.insert_term(p_val.coeff, p_val.exp)
         return new_ll
 
-    # Multiply a polynomial p with the polynomial and return the product as a new linked list.
     def mult(self, p):
         '''
         Multiply a polynomial with polynomial p
-        add exp and mult coefficient
+
+        Return
+        ------
+        LinkedList: new_ll
         '''
         self_term_curr = self.dummy.next
         p_term_curr = p.dummy.next
@@ -184,25 +192,21 @@ class LinkedList:
         return "".join(output)
 
 def main():
-    # read data from stdin (terminal/file) using input() and create polynomial p
-    # read data from stdin (terminal/file) using input() and create polynomial q
-
-    # get sum of p and q as a new linked list and print sum
-
-    # get product of p and q as a new linked list and print product
+    '''
+    Read from stdin to create polynomial. Then calculate both's sum and product.
+    '''
     frequency_p = int(input())
     poly_p = LinkedList()
     poly_q = LinkedList()
     # create p
     for _ in range(frequency_p):
         term_p = input().split()
-        poly_p.insert_term(term_p[0], term_p[1])
+        poly_p.insert_term(int(term_p[0]), int(term_p[1]))
     # create q
     frequency_q = int(input())
     for _ in range(frequency_q):
-        # create p
         term_q = input().split()
-        poly_q.insert_term(term_q[0], term_q[1])
+        poly_q.insert_term(int(term_q[0]), int(term_q[1]))
     # get sum of both & print
     print(term_p.add(term_q))
     # get product of both & print
