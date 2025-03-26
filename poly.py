@@ -185,7 +185,6 @@ class LinkedList:
 
 def main():
     # read data from stdin (terminal/file) using input() and create polynomial p
-
     # read data from stdin (terminal/file) using input() and create polynomial q
 
     # get sum of p and q as a new linked list and print sum
