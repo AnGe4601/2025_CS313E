@@ -154,7 +154,7 @@ class TestAdd(unittest.TestCase):
         self.assertTrue(checker(result, correct_poly))
 
     def test_7(self):
-        """My own test cases"""
+        """Failing test cases on gradescope"""
         poly1 = LinkedList()
         poly1.insert_term(0, 0)
         poly1.insert_term(3, 9)
@@ -171,6 +171,30 @@ class TestAdd(unittest.TestCase):
 
         result = poly1.add(poly2)
         correct_poly = [(3, 9), (69, 3), (6, -2)]
+        self.assertTrue(checker(result, correct_poly))
+
+    def test_8(self):
+        """Failing test cases on gradescope"""
+        poly1 = LinkedList()
+        poly1.insert_term(5, 5)
+        poly1.insert_term(10, 10)
+        poly1.insert_term(4, 4)
+        poly1.insert_term(9, 9)
+        poly1.insert_term(3, 3)
+        poly1.insert_term(8, 8)
+        poly1.insert_term(2, 2)
+        poly1.insert_term(7, 7)
+        poly1.insert_term(1, 1)
+        poly1.insert_term(6, 6)
+        poly2 = LinkedList()
+        poly2.insert_term(-1, 1)
+        poly2.insert_term(-2, 2)
+        poly2.insert_term(-3, 0)
+        poly2.insert_term(-3, 0)
+        poly2.insert_term(-4, 0)
+
+        result = poly1.add(poly2)
+        correct_poly = [(10, 10), (9, 9), (8, 8), (7, 7), (6, 6), (5, 5), (4, 4), (3, 3), (-10, 0)]
         self.assertTrue(checker(result, correct_poly))
 
 

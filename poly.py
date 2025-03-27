@@ -113,6 +113,13 @@ class LinkedList:
     def insert_term(self, coeff, exp):
         '''
         Insert new term into polynomial while keeping the terms in descending order by exponent
+
+        Args:
+        - coeff: The coefficient of the term.
+        - exp: The exponent of the term.
+
+        Return:
+        None
         '''
         if coeff == 0:
             return
@@ -141,33 +148,33 @@ class LinkedList:
         Add a polynomial with polynomial p and return resilt as new polynomial
 
         Args:
-        -p: polynomial p
+        - p: polynomial p
+
+        Return:
+        - new_ll: the calculated sum store as new polynomial
         '''
         self_term_curr = self.dummy.next
         p_term_curr = p.dummy.next
         new_ll = LinkedList()
-        # when both are empty
-        if self_term_curr is None and p_term_curr is None:
-            return new_ll
-        while self_term_curr is not None and p_term_curr is not None:
-            # add coeff when exp equal
-            if self_term_curr.exp == p_term_curr.exp:
-                new_val_coeff = self_term_curr.coeff + p_term_curr.coeff
-                new_ll.insert_term(new_val_coeff, self_term_curr.exp)
-            else:
-                new_ll.insert_term(self_term_curr.coeff, self_term_curr.exp)
-                new_ll.insert_term(p_term_curr.coeff, p_term_curr.exp)
+        # add self
+        while self_term_curr:
+            new_ll.insert_term(self_term_curr.coeff, self_term_curr.exp)
             self_term_curr = self_term_curr.next
-            p_term_curr =  p_term_curr.next
+        # add p
+        while p_term_curr:
+            new_ll.insert_term(p_term_curr.coeff, p_term_curr.exp)
+            p_term_curr = p_term_curr.next
         return new_ll
 
     def mult(self, p):
         '''
         Multiply a polynomial with polynomial p
 
-        Return
-        ------
-        LinkedList: new_ll
+        Args:
+        - p: polynomial p
+
+        Return:
+        - new_ll: the calculated product store as a new polynomial
         '''
         self_term_curr = self.dummy.next
         p_term_curr = p.dummy.next
@@ -184,7 +191,6 @@ class LinkedList:
             p_term_curr = p.dummy.next
         return new_ll
 
-    # Return a string representation of the polynomial.
     def __str__(self):
         output = []
         curr_term = self.dummy.next
