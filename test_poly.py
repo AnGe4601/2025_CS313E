@@ -153,6 +153,26 @@ class TestAdd(unittest.TestCase):
         correct_poly = []
         self.assertTrue(checker(result, correct_poly))
 
+    def test_7(self):
+        """My own test cases"""
+        poly1 = LinkedList()
+        poly1.insert_term(0, 0)
+        poly1.insert_term(3, 9)
+        poly1.insert_term(2, 9)
+        poly1.insert_term(6, 78)
+        poly1.insert_term(6, -2)
+        poly2 = LinkedList()
+        poly2.insert_term(0, -1)
+        poly2.insert_term(3, 3)
+        poly2.insert_term(-2, 9)
+        poly2.insert_term(-6, 78)
+        poly2.insert_term(66, 3)
+
+
+        result = poly1.add(poly2)
+        correct_poly = [(3, 9), (69, 3), (6, -2)]
+        self.assertTrue(checker(result, correct_poly))
+
 
 class TestMult(unittest.TestCase):
     """mult Test Suite"""

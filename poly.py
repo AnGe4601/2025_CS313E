@@ -110,12 +110,9 @@ class LinkedList:
         self.dummy = Node(None, None)
         # self.head = None
 
-    # Insert the term with the coefficient coeff and exponent exp into the polynomial.
-    # If a term with that exponent already exists, add the coefficients together.
-    # You must keep the terms in descending order by exponent.
     def insert_term(self, coeff, exp):
         '''
-        Insert new term into polynomial
+        Insert new term into polynomial while keeping the terms in descending order by exponent
         '''
         if coeff == 0:
             return
@@ -141,25 +138,27 @@ class LinkedList:
 
     def add(self, p):
         '''
-        Add a polynomial with polynomial p
+        Add a polynomial with polynomial p and return resilt as new polynomial
 
-        Return
-        ------
-        LinkedList: new_ll
+        Args:
+        -p: polynomial p
         '''
-        self_val = self.dummy.next
-        p_val = p.dummy.next
+        self_term_curr = self.dummy.next
+        p_term_curr = p.dummy.next
         new_ll = LinkedList()
         # when both are empty
-        if self_val is None and p_val is None:
+        if self_term_curr is None and p_term_curr is None:
             return new_ll
-        # add coeff when exp equal
-        if self_val.exp == p_val.exp:
-            new_val_coeff = self_val.coeff + p_val.coeff
-            new_ll.insert_term(new_val_coeff, self_val.exp)
-            return new_ll
-        new_ll.insert_term(self_val.coeff, self_val.exp)
-        new_ll.insert_term(p_val.coeff, p_val.exp)
+        while self_term_curr is not None and p_term_curr is not None:
+            # add coeff when exp equal
+            if self_term_curr.exp == p_term_curr.exp:
+                new_val_coeff = self_term_curr.coeff + p_term_curr.coeff
+                new_ll.insert_term(new_val_coeff, self_term_curr.exp)
+            else:
+                new_ll.insert_term(self_term_curr.coeff, self_term_curr.exp)
+                new_ll.insert_term(p_term_curr.coeff, p_term_curr.exp)
+            self_term_curr = self_term_curr.next
+            p_term_curr =  p_term_curr.next
         return new_ll
 
     def mult(self, p):
