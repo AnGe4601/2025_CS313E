@@ -387,9 +387,9 @@ class Graph:
             if self.vertices[row_index] in visited_set:
                 return True
             # get its neighbors
+            visited_set.add(self.vertices[row_index])
             adj_vertices = self.get_adjacent_vertices(row_index)
             for adj_vertex_index in adj_vertices:
-                visited_set.add(self.vertices[row_index])
                 return dfs_cycle(adj_vertex_index, visited_set)
             return False
         # visit all vertices
