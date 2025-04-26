@@ -383,20 +383,28 @@ class Graph:
 
         post: returns True if there is a cycle and False otherwise.
         """
-        def dfs_cycle(row_index, visited_set):
-            if self.vertices[row_index] in visited_set:
+        def dfs_cycle(row_index, visited_set, current):
+            # track current path
+            if self.vertices[row_index] in current:
                 return True
-            # get its neighbors
+            # already tracked; know it's cleared
+            if self.vertices[row_index] in visited_set:
+                return False
             visited_set.add(self.vertices[row_index])
+            current.add(self.vertices[row_index])
+            # get its neighbors
             adj_vertices = self.get_adjacent_vertices(row_index)
             for adj_vertex_index in adj_vertices:
-                return dfs_cycle(adj_vertex_index, visited_set)
+                if dfs_cycle(adj_vertex_index, visited_set, current):
+                    return True
+            current.remove(self.vertices[row_index])
             return False
         # visit all vertices
-        for row_index in range(len(self.vertices)):
-            # has cycle
-            if dfs_cycle(row_index, set()):
-                return True
+        visited_set = set()
+        for row_index, vertex in enumerate(self.vertices):
+            if not vertex in visited_set:
+                if dfs_cycle(row_index, visited_set, current=set()):
+                    return True
         return False
 
     def get_registration_plan(self):
